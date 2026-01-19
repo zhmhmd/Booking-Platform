@@ -36,4 +36,22 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{str(self.email) or self.first_name}'
+    
+from random import randint
 
+
+class PasswordResetCode(models.Model):
+    email = models.EmailField(verbose_name='Электроная почта', null=True, blank=True)
+    code = models.CharField(max_length=4)
+    expires_at = models.DateTimeField(auto_now_add=True)
+
+    def is_expired(self):
+        return timezone.now() > self.expires_at
+    
+    @staticmethod
+    def create_code(email):
+        return PasswordResetCode.objects.create(
+            email=email,
+            code=str(randint(1000, 9999)),
+            expires_at=timezone.now() + timedelta(minutes=5)
+        )
