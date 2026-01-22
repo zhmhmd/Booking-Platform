@@ -15,7 +15,7 @@ Booking Platform — это backend-платформа для управлени
 -  Проверка доступного количества билетов
 -  Фильтрация и пагинация
 -  Сброс пароля через email (Celery + Redis)
--  Swagger / OpenAPI документация
+-  Swagger
 -  Docker + Docker Compose
 
 ---
